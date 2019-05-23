@@ -17,16 +17,17 @@ public class BootStrap {
 
 	final static Logger logger = Logger.getLogger(BootStrap.class.getName());
 
-	// TODO read the file name from properties and process
-	private static String fileName = "/Users/aleph/Desktop/rea-robot-simulator-v5/file/rea-robot.txt";
+	// TODO can change the file location
+	private static String fileName = System.getProperty("user.home") + File.separator
+			+ "rea-robot.txt";
 
 	public static void main(String[] args) {
 
 		FileHandler fh;
 
 		try {
-			// TODO change the log location, and can still enhance to add properties file
-			fh = new FileHandler("/Users/aleph/Desktop/rea-robot-simulator-v5/logs/rea.log");
+			// TODO can change the log location
+			fh = new FileHandler(System.getProperty("user.home") + File.separator + "rea.log");
 			logger.addHandler(fh);
 			SimpleFormatter formatter = new SimpleFormatter();
 			fh.setFormatter(formatter);
@@ -64,6 +65,12 @@ public class BootStrap {
 					BufferedReader br = null;
 					try {
 						file = new File(fileName);
+						if (!file.exists()) {
+							logger.warning(
+									" ******* Please create the file in home dir [" + System.getProperty("user.home")
+											+ "] with name rea-robot.txt and valid content in it ******");
+							continue;
+						}
 						br = new BufferedReader(new FileReader(file));
 						String st;
 						while ((st = br.readLine()) != null) {
@@ -73,17 +80,20 @@ public class BootStrap {
 						}
 					} catch (IOException e) {
 						logger.warning(e.getMessage());
+						keepRunning = false;
 					} finally {
 						try {
 							if (br != null)
 								br.close();
 						} catch (IOException e) {
 							logger.warning(e.getMessage());
+							keepRunning = false;
 						}
 					}
 
 				} catch (ToyRobotException e) {
 					logger.info(e.getMessage());
+					keepRunning = false;
 				}
 			} else if ("EXIT".equals(inputString)) {
 				keepRunning = false;
