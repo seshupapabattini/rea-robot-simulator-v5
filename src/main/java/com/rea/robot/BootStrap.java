@@ -68,7 +68,7 @@ public class BootStrap {
 						if (!file.exists()) {
 							logger.warning(
 									" ******* Please create the file in home dir [" + System.getProperty("user.home")
-											+ "] with name rea-robot.txt and valid content in it ******");
+											+ "] with name rea-robot.txt and valid input(refer README.md) in it ******");
 							continue;
 						}
 						br = new BufferedReader(new FileReader(file));

@@ -64,6 +64,26 @@ c)
 
 	Output: 3,3,NORTH
 
+d) 
+
+	FILE
+	
+	Sample Values of the file as below
+	
+	PLACE 0,0,NORTH
+    	MOVE
+    	REPORT
+    	PLACE 0,0,NORTH
+	LEFT
+	REPORT
+	PLACE 1,2,EAST
+	MOVE
+	MOVE
+	LEFT
+	MOVE
+	REPORT
+	
+	Output: 0,1,NORTH; 0,0,WEST; 3,3,NORTH
 
 ## Requirements
 
@@ -86,4 +106,4 @@ c)
 
 - Packaging: `mvn package` or `mvn clean install`, compiled jar in *target/* folder
 
-- Run from Jar: 'java -jar rea-robot-5.0.jar'
+- Run from Jar: `java -jar rea-robot-5.0.jar`
